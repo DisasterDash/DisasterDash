@@ -11,7 +11,7 @@ const Maps = (props, location) => {
     fetch('/chooseLoc/:name')
     .then(data => data.json())
     .then(data => {
-        console.log(data)
+        console.log(data.lat, data.lng)
         latitude = data.lat;
         longitude = data.lng;
     })
@@ -21,8 +21,8 @@ const Maps = (props, location) => {
         aeris.views().then(views => {
             const map = new views.InteractiveMap(document.getElementById('map'), {
                 center: {
-                    lat: latitude,
-                    lon: longitude
+                    lat: 34.0522342,
+                    lon: -118.2436849
                 },
                 zoom: 11,
                 layers: 'fires-outlook,fires-dryltg-outlook,fires-obs-icons,lightning-strike-density,fires-obs-points,alerts,stormcells,tropical-cyclones'

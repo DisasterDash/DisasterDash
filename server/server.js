@@ -13,7 +13,7 @@ const messageController = require('./controllers/messageController');
 const userController = require('./controllers/userController');
 const geolocController = require('./controllers/geolocController')
 
-const MONGO_URI = 'mongodb+srv://StephChiu:Codesmith123@cluster0-ebyb8.mongodb.net/test?retryWrites=true&w=majority'
+const MONGO_URI = process.env.MONGO_URI;
 mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useCreateIndex: true,

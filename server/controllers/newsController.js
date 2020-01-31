@@ -8,7 +8,7 @@ newsController.getNews = (req, res, next) => {
   location = location.replace(" ", "+");
   let disaster = req.query.dis;
   disaster = disaster.replace(" ", "+");
-  const fetchAdd = `https://newsapi.org/v2/everything?qInTitle=${location}+${disaster}&sortBy=publishedAt&apiKey=27c7768c7a1044f9aeee364a9a5f6dfd`;
+  const fetchAdd = `https://newsapi.org/v2/everything?qInTitle=${location}+${disaster}&sortBy=publishedAt&apiKey=${process.env.NEWS_API_KEY}`;
   fetch(fetchAdd)
   .then(body => body.json())
   .then(body =>{
@@ -22,7 +22,7 @@ newsController.getNews = (req, res, next) => {
 newsController.getAlerts = (req, res, next) => {
   const inputLocation = req.query.location || 'LosAngeles';
   const disaster = req.query.disaster;
-  const URL = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${disaster}%7C|${inputLocation}&type=video&key=AIzaSyB9nFVjsg0Nhz2K6XH2UyRBLse8dtXH8UI`
+  const URL = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${disaster}%7C|${inputLocation}&type=video&key=${process.env.ALERTS_API_KEY}`
   axios.get(URL)
     .then(response => {
       console.log('GET ALERTS CONTROLLER -> ', response.data.items);

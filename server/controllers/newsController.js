@@ -22,7 +22,7 @@ newsController.getNews = (req, res, next) => {
 newsController.getAlerts = (req, res, next) => {
   const inputLocation = req.query.location || 'LosAngeles';
   const disaster = req.query.disaster;
-  const URL = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${disaster}%7C|${inputLocation}&type=video&key=AIzaSyAcJRkNJfCvMRIqnH4gOv6A4oLDk2MIbSQ`
+  const URL = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${disaster}%7C|${inputLocation}&type=video&key=AIzaSyB9nFVjsg0Nhz2K6XH2UyRBLse8dtXH8UI`
   axios.get(URL)
     .then(response => {
       console.log('GET ALERTS CONTROLLER -> ', response.data.items);

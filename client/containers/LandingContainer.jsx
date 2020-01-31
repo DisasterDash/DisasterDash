@@ -30,8 +30,7 @@ const LandingContainer = (props) => {
     <div id="landing">
       <div id="landingInfo">
         <h2>DisasterDash</h2>
-        <h3>Keep Up With The Disaster</h3>
-        <p>Outpace your fate</p>
+        <p>Stay up to date with the latest news</p>
         <input onChange= {tempLoc} type="text" value={location}></input><button onClick={() => props.updateLocation(location)}>Search</button>
       </div>
       <div id="particles">
@@ -110,7 +109,6 @@ const LandingContainer = (props) => {
             }
         }} />
       </div>
-      <p id="company">by teamd-Umbledore</p>
     </div>
   );
 }

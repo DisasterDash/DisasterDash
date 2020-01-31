@@ -1,10 +1,29 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const mongoose = require('mongoose');
 const PORT = 3000;
+
+// Web Sockets
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 
 const newsController = require('./controllers/newsController');
 const messageController = require('./controllers/messageController');
+const userController = require('./controllers/userController');
+const geolocController = require('./controllers/geolocController')
+
+const MONGO_URI = process.env.MONGO_URI;
+mongoose.connect(MONGO_URI, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    dbName: 'DisasterDash'
+})
+.then(() => console.log('Connected to Mongo DB.'))
+.catch(err => console.log(err));
+
+app.use(express.urlencoded({ extended: false }))
 
 app.use(express.json());
 app.use(express.static('assets'))
@@ -14,10 +33,41 @@ app.get('/', (req, res) => {
     res.status(200).sendFile(path.join(__dirname, '../index.html'));
 });
 
-//'/main' route redirect
-app.get('/main', (req, res) => {
-  res.redirect('/')
+app.get('/loc', geolocController.getCurrentLoc,(req,res)=> {
+  res.status(200).json(res.locals.locData);
+})
+app.get('/chooseLoc/:name', geolocController.getEnteredLoc, (req, res)=> {
+  res.status(200).json(res.locals.cityLoc)
+})
+
+// '/main' route redirect
+app.get('/main', userController.isLoggedIn, (req, res) => {
+  res.status(200).redirect('/')
 });
+
+// sign up route
+app.post('/signup', userController.createUser, (req, res) => {
+  res.json(res.locals.signup);
+});
+
+// login route
+app.post('/login', userController.verifyUser, userController.setCookie, userController.startSession, (req, res) => {
+  res.status(200).json(res.locals.username)
+});
+
+//github oauth
+app.get("/oathgithub", (req,res,next)=>{
+  console.log('imhere');
+  next();
+},
+  userController.github,
+  userController.setCookie,
+  userController.startSession,
+  (req, res) => {
+    // what should happen here on successful log in?
+    res.redirect("/");
+  }
+);
 
 // Serve Particle SVG
 app.get('/flare', (req, res) => {
@@ -37,7 +87,7 @@ app.get('/news', newsController.getNews, (req, res) => {
 });
 // '/alerts' route will respond with an array of alerts from LAFD: {title: 'Alert', link: 'www.alertLink.com'}
 app.get('/alerts', newsController.getAlerts, (req, res) => {
-  res.json(res.locals.alerts);
+  res.sendStatus(200);
 });
 
 app.use('/build', express.static(path.join(__dirname, '../build')));
@@ -65,6 +115,25 @@ app.use((err, req, res, next) => {
     res.sendStatus(500);
 });
 
-app.listen(PORT, () => {
-    console.log(`Server listening on port: ${PORT}`);
+// app.listen(PORT, () => {
+//     console.log(`Server listening on port: ${PORT}`);
+// });
+
+
+// Web Sockets Implementation
+io.on('connection', function(socket) {
+  console.log('a user connected');
+  socket.on('disconnect', function() {
+    console.log('user disconnected');
+  })
+
+  socket.on('chat', (data) => {
+    console.log('MSG DATA -> ', data);
+    io.sockets.emit('chat', data);
+  });
 });
+
+http.listen(PORT, () => {
+  console.log(`HTTP Server on :${PORT}`);
+})
+

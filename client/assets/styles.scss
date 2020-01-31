@@ -1,4 +1,4 @@
-//NewsContianer styling
+//NewsContainer styling
 #tabs {
     display: flex;
 }
@@ -84,25 +84,25 @@ hr {
 }
 
 .alertEntry {
-    color: whitesmoke;
-    border: solid 1px;
-    background-color: lightcoral;
-    border-radius: 5px;
-    margin: 5px;
-    width: max-content;
-    padding: 1px;
-    padding-left: 5px;
-    padding-right: 10px;
+    // color: whitesmoke;
+    // border: solid 1px;
+    // background-color: lightcoral;
+    // border-radius: 5px;
+    margin: 10px;
+    min-height: 500px;
+    width: 100%;
+    // padding: 1px;
+    // padding-left: 5px;
+    // padding-right: 10px;
 }
 
-.alertEntry:hover {
-    color: lightcoral;
-    text-decoration: none;
-    background-color: whitesmoke;
-} 
+// .alertEntry:hover {
+//     color: lightcoral;
+//     text-decoration: none;
+//     background-color: whitesmoke;
+// } 
 
 //MainContainer Styling
-
 .navLinks:hover {
     color: lightcoral;
     text-decoration: none;
@@ -110,19 +110,73 @@ hr {
 
 .navLinks {
     color: white;
+    margin-right: 30px;
 }
 
 .navbar {
     box-shadow: black 0px 5px 10px;
 }
 
+.navButtons {
+  margin: 10px;
+}
+
+// Login and Sign up Pages
+
+.greeting {
+  color: white;
+}
+
+.signupPage, .loginPage {
+  background-color: #343a40;
+  color: white;
+  border-radius: 3px;
+}
+
+.signupForm, .loginForm {
+  padding-top: 10px;
+  label {
+    margin: 5px;
+  }
+  input, a {
+    margin: 5px;
+    border-radius: 3px;
+  }
+}
+
+
+.loginForm a {
+  color: white;
+  padding: 5px;
+}
 
 //landing page styles
 #landing {
     display:flex;
     height: 100vh;
     width: 100vw;
-    background: linear-gradient(135deg, #fdc830, #f37335);
+    background: linear-gradient(88deg, #ff0000, #feff00);
+background-size: 400% 400%;
+
+-webkit-animation: AnimationName 16s ease infinite;
+-moz-animation: AnimationName 16s ease infinite;
+animation: AnimationName 16s ease infinite;
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
     align-items: center;
     #landingInfo{
         padding-left: 4vw;
@@ -132,9 +186,9 @@ hr {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             font-size: 60px;
         } 
-        span {
+        h3 {
             display: inline-block;
-            margin-left: 20px;
+            
             color:white;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             font-size: 40px;
@@ -158,17 +212,38 @@ hr {
 }
 
 #content {
-    background: linear-gradient(135deg, #fdc830, #f37335);
+background: linear-gradient(88deg, #ff0000, #feff00);
+background-size: 400% 400%;
+
+-webkit-animation: AnimationName 16s ease infinite;
+-moz-animation: AnimationName 16s ease infinite;
+animation: AnimationName 16s ease infinite;
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
     display: grid;
     grid-template-columns: 40px repeat(8, 2fr) 40px;
-    grid-template-rows: 40px repeat(8, 2fr) 40px;
+    grid-template-rows: repeat(9, 2fr) 40px;
     height: 100vh;
     width: 100vw;
     padding-top: 30px;
-    #news {
-        // background: #343a40;
-        // border-radius: 5px;
-        // border:black solid 1px;
+    #social {
+        background: #343a40;
+        border-radius: 5px;
+        border:black solid 1px;
         margin-right: 30px;
         grid-column-start: 2;
         grid-column-end: 7;
@@ -183,7 +258,7 @@ hr {
         grid-row-start: 2;
         grid-row-end: 7;
     }
-    #social {
+    #news {
         background: #343a40;
         border-radius: 5px;
         border:black solid 1px;
@@ -210,11 +285,23 @@ hr {
 //messages styling
 
 #messages {
-    display:flex;
-    flex-direction: column;
     overflow: auto;
+    min-width: 300px;
     p {
         color: white;
+        margin: 0;
+    }
+    #input-field {
+        width: 100%;
+    }
+    #message {
+        width: 80%;
+        outline: none;
+    }
+    #send {
+        height: 30px;
+        width: 20%;
+        border: none;
     }
 }
 
@@ -242,5 +329,21 @@ hr {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: coral; 
+}
+
+// Donate tab
+.donateCard {
+  margin-top: 25px;
+}
+
+#donateHeader {
+  padding-top: 100px;
+  padding-bottom: 700px;
+  color: rgb(59, 59, 59);
+  background-image: url("https://cdn.pixabay.com/photo/2018/10/04/07/04/trees-3723070_1280.jpg");
+  background-size: 100%;
+  #donateText {
+    margin: 25px;
+  }
 }
 
